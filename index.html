@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript(Inheritance and Prototype)</title>
+</head>
+<style>
+    pre{
+      font-size: 15px;
+    }
+</style>
+<body>
+    <h1>Javascript Assignment(Inheritance and Prototype)</h1>
+    <pre>
+
+    <b>Ques: Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using
+        parents prototype</b>
+
+    Ans:
+        const parent = {
+            value: 2,
+            method() {
+                return this.value + 1;
+            }
+        };
+        console.log(parent.method()); // 3
+
+        const child = {
+            __proto__: parent,
+        };
+
+        console.log(child.method()); // 3
+        child.value = 4; // assign the value 4 to the property 'value' on child.
+        console.log(child.method()); // 5
+   
+    
+    
+    <b>Ques: Write code to explain prototype chaining</b>
+
+    Ans:
+    <ul>
+        <li>JavaScript Prototype</li>
+        <li>In JavaScript, every function and object has a property named prototype by default. For example,</li>
+        
+                function Person () {
+                    this.name = 'John',
+                    this.age = 23
+                }
+                const person = new Person();
+                // checking the prototype value
+                console.log(Person.prototype); // { ... }
+           
+        <li>In the above example, we are trying to access the prototype property of a Person constructor function. <br>
+            Since the prototype property has no value at the moment, it shows an empty object { ... }.</li>
+        <li>JavaScript Prototype Chaining</li>
+        <li>If an object tries to access the same property that is in the constructor function and the prototype
+            object,<br>
+            the object takes the property from the constructor function. For example,</li>
+        
+            function Person() {
+                this.name = 'John'
+            }
+            
+            // adding property 
+            Person.prototype.name = 'Peter';
+            Person.prototype.age = 23
+            
+            const person1 = new Person();
+            
+            console.log(person1.name); // John
+            console.log(person1.age); // 23
+         
+        
+In the above program, a property <b>name</b> is declared in the constructor function and also in the prototype property 
+of the constructor function.When the program executes, <b>person1.name</b> looks in the constructor function to see if there is a property named name.
+Since the constructor function has the name property with value 'John', the object takes value from that property.
+When the program executes, person1.age looks in the constructor function to see if there is a property named age.
+Since the constructor function doesn't have age property, the program looks into the prototype object of the constructor
+function and the object inherits property from the prototype object (if available).</ul>
+
+    <b>Ques: Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum
+        for multiple arrays</b>
+
+    Ans:
+        Array.prototype.add = function () {
+            let sum = 0; // initialize sum 
+
+            for (let i = 0; i < this.length; i++)
+                sum += this[i];
+
+            return sum;
+        };
+        const arr = [1,2,3];
+        const arr2 = [2,3,5,6,89]
+        let abc = arr.add();
+        let xyz = arr2.add();
+        console.log("Sum of Array is :" +abc);
+        console.log("Sum of Array is :" +xyz);
+    
+    
+    <b>Ques: Write a JavaScript function to retrieve all the names of object's own and inherited properties.</b>
+    
+    Ans:
+        const user = {
+            name: 'Umang',
+            age: 21
+        }
+        const props = Object.getOwnPropertyNames(user)
+
+        console.log(props) // [ 'name', 'age' ]
+    
+    
+    </pre>
+    <script src="index.js"></script>
+</body>
+
+</html>
